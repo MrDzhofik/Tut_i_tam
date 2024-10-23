@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+{% for tour in tours %}
+<div>
+    <h4><a href="{% url 'tour_info' tour.id %}"> {{tour.name}} </a></h4>
+
+    <img src="{{ tour.photo.url }}" alt="{{ tour.name }}" width="720px" height="540px">
+
+</div>
+{% endfor %}
+
+{% endblock content %}
