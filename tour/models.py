@@ -1,5 +1,7 @@
 from django.db import models
 import datetime
+import os
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -43,14 +45,20 @@ class Hotel(models.Model):
 
 class Hotel_photo(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name="Отель")
-    image_url = models.CharField(max_length=100, verbose_name="Путь до картинки", default="")
+    photo = models.ImageField(verbose_name="Фото", default="default.JPG", upload_to="hotel")
+
+    def get_hotel_upload_path(self, filename):
+        return os.path.join('hotel', self.hotel.name, filename)
+    
+    photo = models.ImageField(verbose_name="Фото", default="default.JPG", upload_to=get_hotel_upload_path)
 
     class Meta:
        verbose_name = "Фото отеля"
        verbose_name_plural = "Фото отелей"
     
     def __str__(self):
-        return self.hotel + self.image_url
+        name = self.photo.url.split("/")[-1]
+        return f"{self.hotel} - {name}"
 
 class Excursion(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название экскурсии")
@@ -66,14 +74,20 @@ class Excursion(models.Model):
     
 class Excursion_photo(models.Model):
     excursion = models.ForeignKey(Excursion, on_delete=models.CASCADE, verbose_name="Отель")
-    image_url = models.CharField(max_length=100, verbose_name="Путь до картинки", default="")
+
+    def get_excursion_upload_path(self, filename):
+        return os.path.join('excursion', self.excursion.name, filename)
+    
+    photo = models.ImageField(verbose_name="Фото", default="default.JPG", upload_to=get_excursion_upload_path)
+    
 
     class Meta:
        verbose_name = "Фото экскурсии"
        verbose_name_plural = "Фото экскурсии"
     
     def __str__(self):
-        return self.excursion + self.image_url
+        name = self.photo.url.split("/")[-1]
+        return f"{self.excursion} - {name}"
 
 class Tour_Excursion(models.Model):
     tour = models.ForeignKey(Tour, verbose_name="Тур", on_delete=models.CASCADE)
