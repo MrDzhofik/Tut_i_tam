@@ -1,20 +1,7 @@
-.name {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.user_info {
-    display: flex;
-}
-
-.img-fluid {
-    height: 40px;
-    width: 40px;
+    background-color: #000;
+    /* Фон сайта - черный */
+    color: #E0E0E0;
+    /* Основной цвет текста - светло-серый */
+    font-family: Arial, sans-serif;
 }

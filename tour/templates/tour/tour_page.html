@@ -1,9 +1,44 @@
 {% extends 'main.html' %}
+{% load static%}
+
+<link rel="stylesheet" src="{% static 'css/navbar.css' %}">
 
 {% block content%}
-<div>
-    <h4>{{tour.name}}</h4>
-    <p>{{tour.text}}</p>
+
+<div class="tour-info-container">
+    <h1>{{ tour.name }}</h1>
+    <img src="{{ tour.photo.url }}" alt="{{ tour.name }}" class="tour-main-photo">
+    <p>{{ tour.description }}</p>
+
+    <div class="tour-section">
+        <h2>Программа тура</h2>
+        <ul>
+            {% for excursion in program %}
+            <li>
+                <h3>{{ excursion.excursion.name }} - {{excursion.date|date:"d.m.Y"}}</h3>
+                <!-- <p><strong>Продолжительность:</strong> {{ excursion.excursion.interval }}</p>
+                <p>{{ excursion.excursion.description }}</p> -->
+            </li>
+            {% empty %}
+            <p>Нет информации о программе.</p>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="tour-section">
+        <h2>Отели</h2>
+        <span>{{tour.hotel_description}}</span>
+        <ul>
+            {% for hotel in hotels %}
+            <li>
+                <h3>{{ hotel.hotel.name }}</h3>
+                <p><strong>Адрес:</strong> {{ hotel.hotel.adress }}</p>
+            </li>
+            {% empty %}
+            <p>Нет информации об отелях.</p>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
 {% endblock content %}

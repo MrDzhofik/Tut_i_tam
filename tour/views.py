@@ -9,4 +9,12 @@ def home(request):
 
 def show_tour(request, tour_id):
     tour = Tour.objects.get(id=tour_id)
-    return render(request, 'tour/tour_page.html', context={'tour':tour})
+    program = Tour_Excursion.objects.filter(tour=tour)
+    hotels = Tour_Hotel.objects.filter(tour=tour)
+    return render(request, 
+                  'tour/tour_page.html', 
+                  context={
+                        'tour':tour, 
+                        'program': program,
+                        'hotels': hotels,
+                        })

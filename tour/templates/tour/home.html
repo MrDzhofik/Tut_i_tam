@@ -1,14 +1,23 @@
 {% extends 'main.html' %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
 {% block content%}
 
-{% for tour in tours %}
-<div>
-    <h4><a href="{% url 'tour_info' tour.id %}"> {{tour.name}} </a></h4>
-
-    <img src="{{ tour.photo.url }}" alt="{{ tour.name }}" width="720px" height="540px">
-
+<div class="tour-cards">
+    {% for tour in tours %}
+    <a href="{% url 'tour_info' tour.id %}">
+        <div class="tour-card">
+            <img src="{{ tour.photo.url }}" alt="{{ tour.name }}" class="tour-photo">
+            <div class="tour-info">
+                <h4>{{ tour.name }}</h4>
+                <p>Даты: {{ tour.start_date|date:"d.m.Y" }} - {{ tour.end_date|date:"d.m.Y" }}</p>
+                <p>Цена: {{ tour.price }} ₽</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
 </div>
-{% endfor %}
 
 {% endblock content %}

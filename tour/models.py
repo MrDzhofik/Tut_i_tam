@@ -21,8 +21,9 @@ class Tour(models.Model):
     end_date = models.DateField(default=datetime.date.today, verbose_name="Дата конца")
     town = models.ForeignKey(Town, on_delete=models.CASCADE, related_name='towns', verbose_name="Город")
     price = models.IntegerField(verbose_name="Цена тура")
-    text = models.TextField(verbose_name="Описание", default="Тур")
+    description = models.TextField(verbose_name="Описание", default="Тур")
     photo = models.ImageField(verbose_name="Фото", default="default.JPG", upload_to="tour_photo")
+    hotel_description = models.TextField(verbose_name="Описание отелей", default="Отель")
 
     class Meta:
        verbose_name = "Тур"
@@ -92,13 +93,14 @@ class Excursion_photo(models.Model):
 class Tour_Excursion(models.Model):
     tour = models.ForeignKey(Tour, verbose_name="Тур", on_delete=models.CASCADE)
     excursion = models.ForeignKey(Excursion, verbose_name="Экскурсия", on_delete=models.CASCADE)
+    date = models.DateField(default=datetime.date.today())
 
     class Meta:
         verbose_name = "Тур_Экскурсия"
         verbose_name_plural = "Тур-Экскурсии"
 
     def __str__(self):
-        return self.tour + self.excursion
+        return self.tour.name+ self.excursion.name
 
 class Tour_Hotel(models.Model):
     tour = models.ForeignKey(Tour, verbose_name="Тур", on_delete=models.CASCADE)
@@ -109,4 +111,4 @@ class Tour_Hotel(models.Model):
         verbose_name_plural = "Тур-Отели"
 
     def __str__(self):
-        return self.tour + self.hotel
+        return self.tour.name  + " - " + self.hotel.name
