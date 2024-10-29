@@ -16,8 +16,6 @@
             {% for excursion in program %}
             <li>
                 <h3>{{ excursion.excursion.name }} - {{excursion.date|date:"d.m.Y"}}</h3>
-                <!-- <p><strong>Продолжительность:</strong> {{ excursion.excursion.interval }}</p>
-                <p>{{ excursion.excursion.description }}</p> -->
             </li>
             {% empty %}
             <p>Нет информации о программе.</p>
