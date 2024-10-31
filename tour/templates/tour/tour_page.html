@@ -1,9 +1,10 @@
 {% extends 'main.html' %}
-{% load static%}
 
-<link rel="stylesheet" src="{% static 'css/navbar.css' %}">
 
 {% block content%}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/tour_page.css' %}">
 
 <div class="tour-info-container">
     <h1>{{ tour.name }}</h1>

@@ -1,9 +1,10 @@
 {% extends 'main.html' %}
 
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
 
 {% block content%}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 
 <div class="tour-cards">
     {% for tour in tours %}
