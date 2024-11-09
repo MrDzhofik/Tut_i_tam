@@ -16,7 +16,9 @@
         <ul>
             {% for excursion in program %}
             <li>
-                <h3>{{ excursion.excursion.name }} - {{excursion.date|date:"d.m.Y"}}</h3>
+                <h3><a class="excursion-link" href="{% url 'excursion_info' excursion.excursion.id %}">
+                        {{excursion.excursion.name }}</a> -
+                    {{excursion.date|date:"d.m.Y"}}</h3>
             </li>
             {% empty %}
             <p>Нет информации о программе.</p>

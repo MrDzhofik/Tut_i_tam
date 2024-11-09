@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/excursion_page.css' %}">
+
+<div class="excursion-card">
+    <h1>{{ excursion.name }}</h1>
+    <h3>Продолжительность: {{ excursion.interval }}</h3>
+    <h4>{{ excursion.description }}</h4>
+
+    <!-- Карусель фотографий с навигационными кнопками -->
+    <div class="excursion-photo-carousel">
+        <button class="carousel-btn prev-btn" onclick="prevPhoto()">&#10094;</button>
+
+        <div class="photo-wrapper">
+            {% for elem in photos %}
+            <img src="{{ elem.photo.url }}" alt="{{ excursion.name }}" class="excursion-photo"
+                onclick="openModal('{{ elem.photo.url }}')">
+            {% endfor %}
+        </div>
+
+        <button class=" carousel-btn next-btn" onclick="nextPhoto()">&#10095;</button>
+    </div>
+</div>
+
+<!-- Модальное окно -->
+<div id="photoModal" class="modal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script src="{% static 'js/excursion_page.js' %}"></script>
+{% endblock content %}

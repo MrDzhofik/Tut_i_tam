@@ -11,10 +11,20 @@ def show_tour(request, tour_id):
     tour = Tour.objects.get(id=tour_id)
     program = Tour_Excursion.objects.filter(tour=tour)
     hotels = Tour_Hotel.objects.filter(tour=tour)
+    context = {'tour':tour, 
+               'program': program,
+               'hotels': hotels,
+              }
     return render(request, 
                   'tour/tour_page.html', 
-                  context={
-                        'tour':tour, 
-                        'program': program,
-                        'hotels': hotels,
-                        })
+                  context=context)
+
+
+def show_excursion(request, excursion_id):
+    excursion = Excursion.objects.get(id=excursion_id)
+    photos = Excursion_photo.objects.filter(excursion=excursion)
+    context = {"excursion": excursion,
+               "photos": photos,
+              }
+    
+    return render(request, 'tour/excursion_page.html', context=context)
