@@ -28,3 +28,12 @@ def show_excursion(request, excursion_id):
               }
     
     return render(request, 'tour/excursion_page.html', context=context)
+
+def show_hotel(request, hotel_id):
+    hotel = Hotel.objects.get(id=hotel_id)
+    photos = Hotel_photo.objects.filter(hotel=hotel)
+    context = {
+        "hotel": hotel,
+        "photos": photos
+    }
+    return render(request, 'tour/hotel_page.html', context=context)

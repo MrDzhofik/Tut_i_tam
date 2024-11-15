@@ -32,7 +32,8 @@
         <ul>
             {% for hotel in hotels %}
             <li>
-                <h3>{{ hotel.hotel.name }}</h3>
+                <h3><a class="hotel-link" href="{% url 'hotel_info' hotel.hotel.id %}">
+                        {{hotel.hotel.name }}</a></h3>
                 <p><strong>Адрес:</strong> {{ hotel.hotel.adress }}</p>
             </li>
             {% empty %}
