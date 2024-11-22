@@ -49,3 +49,8 @@
     /* Оранжевый цвет для названий */
     margin-bottom: 5px;
 }
+
+.excursion-link {
+    color: gold;
+    text-decoration: none;
+}
