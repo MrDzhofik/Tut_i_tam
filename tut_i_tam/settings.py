@@ -29,6 +29,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['tutitamabh.ru','176.124.215.186', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['https://tutitamabh.ru']
+
 
 # Application definition
 
