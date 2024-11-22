@@ -1,7 +1,7 @@
 /* Основной контейнер для информации о туре */
 .tour-info-container {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 20px;
     background-color: #1E1E1E;
     /* Темный фон */
@@ -48,4 +48,14 @@
     color: #FFA500;
     /* Оранжевый цвет для названий */
     margin-bottom: 5px;
+}
+
+.excursion-link {
+    color: gold;
+    text-decoration: none;
+}
+
+.hotel-link {
+    color: gold;
+    text-decoration: none;
 }
