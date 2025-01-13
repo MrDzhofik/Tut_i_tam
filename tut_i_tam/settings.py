@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-from .db_config import DATABASE
+from .db_config import DATABASE, KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-iu$ir=9#xk^4i#)gld1$!zf$1%w_s_#^_*-eug=0+x*x=z(clk'
+SECRET_KEY = KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tutitamabh.ru','176.124.215.186', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['https://tutitamabh.ru']
 
 
 # Application definition
@@ -122,7 +124,6 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'all_staticfiles'
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'static')
     BASE_DIR / 'tour' / 'static',
     BASE_DIR / 'static',
     
