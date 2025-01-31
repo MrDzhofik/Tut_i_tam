@@ -41,6 +41,37 @@
             {% endfor %}
         </ul>
     </div>
+
+    <form id="ContactForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+    <p id="responseMessage"></p>
 </div>
+
+<script>
+    document.getElementById("ContactForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let formData = new FormData(this);
+
+        fetch("", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    document.getElementById("responseMessage").innerText = data.message;
+                    document.getElementById("ContactForm").reset();
+                } else {
+                    document.getElementById("responseMessage").innerText = "Ошибка: " + JSON.stringify(data.errors);
+                }
+            })
+            .catch(error => console.error("Ошибка:", error));
+    });
+</script>
+
 
 {% endblock content %}

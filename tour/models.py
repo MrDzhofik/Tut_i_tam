@@ -112,3 +112,17 @@ class Tour_Hotel(models.Model):
 
     def __str__(self):
         return self.tour.name  + " - " + self.hotel.name
+    
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=100, verbose_name="Имя", blank=False)
+    email = models.EmailField(max_length=100, verbose_name="Почта", blank=False)
+    phone = models.CharField(max_length=50, verbose_name="Номер телефона", blank=False)
+
+    class Meta:
+        verbose_name = "Заявка"
+        verbose_name_plural = "Заявки"
+
+    def __str__(self):
+        return self.first_name + " - " + self.email
