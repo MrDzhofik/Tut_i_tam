@@ -5,11 +5,12 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/tour_page.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
 
 <div class="tour-info-container">
     <h1>{{ tour.name }}</h1>
     <img src="{{ tour.photo.url }}" alt="{{ tour.name }}" class="tour-main-photo">
-    <p>{{ tour.description }}</p>
+    <p>{{ tour.description|linebreaksbr }}</p>
 
     <div class="tour-section">
         <h2>Программа тура</h2>
@@ -28,7 +29,7 @@
 
     <div class="tour-section">
         <h2>Отели</h2>
-        <span>{{tour.hotel_description}}</span>
+        <span>{{tour.hotel_description|linebreaksbr}}</span>
         <ul>
             {% for hotel in hotels %}
             <li>
@@ -44,9 +45,33 @@
 
     <form id="ContactForm">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Отправить</button>
+        <div class="form-group">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+            <div class="error-message">{{ form.first_name.errors }}</div>
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            <div class="error-message">{{ form.email.errors }}</div>
+        </div>
+
+        <div class="form-group">
+            {{ form.phone.label_tag }}
+            {{ form.phone }}
+            <div class="error-message">{{ form.phone.errors }}</div>
+        </div>
+
+        <div class="form-group">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+        </div>
+
+        <button type="submit">Отправить заявку</button>
     </form>
+
+
     <p id="responseMessage"></p>
 </div>
 

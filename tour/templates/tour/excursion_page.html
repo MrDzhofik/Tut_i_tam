@@ -7,8 +7,7 @@
 
 <div class="excursion-card">
     <h1>{{ excursion.name }}</h1>
-    <h3>Продолжительность: {{ excursion.interval }}</h3>
-    <h4>{{ excursion.description }}</h4>
+    <h3>Длительность: {{ excursion.interval }}</h3>
 
     <!-- Карусель фотографий с навигационными кнопками -->
     {% if photos.exists %}
@@ -27,6 +26,14 @@
     {% else %}
     <p class="no-photos">Нет фотографий</p>
     {% endif %}
+
+    <h4>Маршрут: </h4>
+    <h4>{{ excursion.description|linebreaksbr }}</h4>
+
+    <h4>Входит в стоимость: {{ excursion.in_price|linebreaksbr }}</h4>
+    <h4>Не входит в стоимость: {{ excursion.out_price|linebreaksbr }}</h4>
+
+    <h4>Стоимость билета: {{ excursion.price|linebreaksbr }} </h4>
 
     <button onclick="history.back()" class="back-button">Назад</button>
 </div>

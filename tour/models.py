@@ -65,6 +65,10 @@ class Excursion(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название экскурсии")
     interval = models.CharField(max_length=50, verbose_name="Продолжительность")
     description = models.TextField(verbose_name="Описание", default="Экскурсия")
+    route = models.TextField(verbose_name="Маршрут", default="Маршрут")
+    in_price = models.TextField(verbose_name="Входит в стоимость", default="Поездка")
+    out_price = models.TextField(verbose_name="Не входит в стоимость", default="Личные расходы")
+    price = models.TextField(verbose_name="Стоимость билета", default="Бесценно")
 
     class Meta:
         verbose_name = "Экскурсия"
@@ -119,6 +123,7 @@ class Contact(models.Model):
     first_name = models.CharField(max_length=100, verbose_name="Имя", blank=False)
     email = models.EmailField(max_length=100, verbose_name="Почта", blank=False)
     phone = models.CharField(max_length=50, verbose_name="Номер телефона", blank=False)
+    message = models.CharField(max_length=500, verbose_name="Сообщение", blank=True)
 
     class Meta:
         verbose_name = "Заявка"
