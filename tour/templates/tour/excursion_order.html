@@ -1,46 +1,44 @@
 {% extends 'main.html' %}
 
-
 {% block content%}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/tour_page.css' %}">
+<link rel="stylesheet" href="{% static 'css/excursion_page.css' %}">
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 
-<div class="tour-info-container">
-    <h1>{{ tour.name }}</h1>
-    <img src="{{ tour.photo.url }}" alt="{{ tour.name }}" class="tour-main-photo">
-    <p>{{ tour.description|linebreaksbr }}</p>
+<div class="excursion-card">
+    <h1>{{ excursion.name }}</h1>
+    <h3>Длительность: {{ excursion.interval }}</h3>
 
-    <div class="tour-section">
-        <h2>Программа тура</h2>
-        <ul>
-            {% for excursion in program %}
-            <li>
-                <h3><a class="excursion-link" href="{% url 'excursion_info' excursion.excursion.id %}">
-                        {{excursion.excursion.name }}</a> -
-                    {{excursion.date|date:"d.m.Y"}}</h3>
-            </li>
-            {% empty %}
-            <p>Нет информации о программе.</p>
+    <!-- Карусель фотографий с навигационными кнопками -->
+    {% if photos.exists %}
+    <div class="excursion-photo-carousel">
+        <button class="carousel-btn prev-btn" onclick="prevPhoto()">&#10094;</button>
+
+        <div class="photo-wrapper">
+            {% for elem in photos %}
+            <img src="{{ elem.photo.url }}" alt="{{ excursion.name }}" class="excursion-photo"
+                onclick="openModal('{{ elem.photo.url }}')">
             {% endfor %}
-        </ul>
+        </div>
+
+        <button class=" carousel-btn next-btn" onclick="nextPhoto()">&#10095;</button>
     </div>
+    {% else %}
+    <p class="no-photos">Нет фотографий</p>
+    {% endif %}
 
-    <div class="tour-section">
-        <h2>Отели</h2>
-        <span>{{tour.hotel_description|linebreaksbr}}</span>
-        <ul>
-            {% for hotel in hotels %}
-            <li>
-                <h3><a class="hotel-link" href="{% url 'hotel_info' hotel.hotel.id %}">
-                        {{hotel.hotel.name }}</a></h3>
-                <p><strong>Адрес:</strong> {{ hotel.hotel.adress }}</p>
-            </li>
-            {% empty %}
-            <p>Нет информации об отелях.</p>
-            {% endfor %}
-        </ul>
+    <div class="excursion-details">
+        <h4>Маршрут:</h4>
+        <h4>{{ excursion.description|linebreaksbr }}</h4>
+
+        <h4>Входит в стоимость: </br>
+            {{ excursion.in_price|linebreaksbr }}</h4>
+        <h4>Не входит в стоимость: </br>
+            {{ excursion.out_price|linebreaksbr }}</h4>
+
+        <h4>Стоимость билета: </br>
+            {{ excursion.price|linebreaksbr }}</h4>
     </div>
 
     <form id="ContactForm">
@@ -64,6 +62,16 @@
         </div>
 
         <div class="form-group">
+            {{ form.place.label_tag }}
+            {{ form.place }}
+        </div>
+
+        <div class="form-group">
+            {{ form.date.label_tag }}
+            {{ form.date }}
+        </div>
+
+        <div class="form-group">
             {{ form.message.label_tag }}
             {{ form.message }}
         </div>
@@ -71,9 +79,19 @@
         <button type="submit">Отправить заявку</button>
     </form>
 
-
     <p id="responseMessage"></p>
 </div>
+
+
+
+<!-- Модальное окно -->
+<div id="photoModal" class="modal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script src="{% static 'js/excursion_page.js' %}"></script>
+
 
 <script>
     document.getElementById("ContactForm").addEventListener("submit", function (event) {
@@ -97,6 +115,4 @@
             .catch(error => console.error("Ошибка:", error));
     });
 </script>
-
-
 {% endblock content %}

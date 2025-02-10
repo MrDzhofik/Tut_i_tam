@@ -8,7 +8,7 @@
 <div class="hotel-card">
     <h1>{{ hotel.name }}</h1>
     <h3>Адрес: {{ hotel.adress }}</h3>
-    <h4>{{ hotel.info }}</h4>
+    <h4>{{ hotel.info|linebreaksbr }}</h4>
 
     <!-- Карусель фотографий с навигационными кнопками -->
     {% if photos.exists %}
