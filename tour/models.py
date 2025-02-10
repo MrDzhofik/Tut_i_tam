@@ -60,7 +60,7 @@ class Hotel_photo(models.Model):
     def __str__(self):
         name = self.photo.url.split("/")[-1]
         return f"{self.hotel} - {name}"
-
+    
 class Excursion(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название экскурсии")
     interval = models.CharField(max_length=50, verbose_name="Продолжительность")
@@ -76,6 +76,10 @@ class Excursion(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_first_photo(self):
+        first_photo = Excursion_photo.objects.filter(excursion=self).first()
+        return first_photo.photo.url if first_photo else "default.JPG"
     
 class Excursion_photo(models.Model):
     excursion = models.ForeignKey(Excursion, on_delete=models.CASCADE, verbose_name="Отель")
@@ -124,10 +128,12 @@ class Contact(models.Model):
     email = models.EmailField(max_length=100, verbose_name="Почта", blank=False)
     phone = models.CharField(max_length=50, verbose_name="Номер телефона", blank=False)
     message = models.CharField(max_length=500, verbose_name="Сообщение", blank=True)
+    place = models.CharField(max_length=255, verbose_name="Место отправления", blank=True)
+    date = models.DateField(verbose_name="Дата экскурсии", default=datetime.date.today)
 
     class Meta:
         verbose_name = "Заявка"
         verbose_name_plural = "Заявки"
 
     def __str__(self):
-        return self.first_name + " - " + self.email
+        return f"Заявка {self.user.username} на {self.excursion} ({self.date})"
