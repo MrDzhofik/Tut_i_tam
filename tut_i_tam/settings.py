@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from .db_config import DATABASE, KEY, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,9 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['tutitamabh.ru','176.124.215.186', '127.0.0.1']
+
 
 CSRF_TRUSTED_ORIGINS = ['https://tutitamabh.ru']
 
@@ -38,6 +40,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_USE_TLS = True
+
 
 
 # Application definition
