@@ -7,7 +7,7 @@ from .forms import ContactForm
 
 def home(request):
     tour = Tour.objects.all()
-    excursions = Excursion.objects.all()
+    excursions = Excursion.objects.filter(public=True)
     context = {
         "tours": tour,
         "excursions": excursions

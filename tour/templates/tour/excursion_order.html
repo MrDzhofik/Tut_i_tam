@@ -29,16 +29,19 @@
     {% endif %}
 
     <div class="excursion-details">
-        <h4>Маршрут:</h4>
+        <h3>Описание:</h3>
         <h4>{{ excursion.description|linebreaksbr }}</h4>
 
-        <h4>Входит в стоимость: </br>
-            {{ excursion.in_price|linebreaksbr }}</h4>
+        <h3>Маршрут:</h3>
+        <h4>{{ excursion.route|linebreaksbr }}</h4>
+
+        <h3>Входит в стоимость: </h3>
+        <h4>{{ excursion.in_price|linebreaksbr }}</h4>
         <h4>Не входит в стоимость: </br>
             {{ excursion.out_price|linebreaksbr }}</h4>
 
-        <h4>Стоимость билета: </br>
-            {{ excursion.price|linebreaksbr }}</h4>
+        <h3>Стоимость билета: </h3>
+        <h4>{{ excursion.price|linebreaksbr }}</h4>
     </div>
 
     <form id="ContactForm">

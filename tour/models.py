@@ -69,6 +69,7 @@ class Excursion(models.Model):
     in_price = models.TextField(verbose_name="Входит в стоимость", default="Поездка")
     out_price = models.TextField(verbose_name="Не входит в стоимость", default="Личные расходы")
     price = models.TextField(verbose_name="Стоимость билета", default="Бесценно")
+    public = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Экскурсия"
