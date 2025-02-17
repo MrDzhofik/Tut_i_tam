@@ -135,3 +135,20 @@
     padding: 15px;
     border-radius: 5px;
 }
+
+.section-title {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #ffa500;
+    /* Оранжевая линия для разделения */
+    padding-bottom: 5px;
+    color: #FFA500;
+}
+
+.section-content {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    font-size: 1.1em;
+    /* color: #555; */
+}

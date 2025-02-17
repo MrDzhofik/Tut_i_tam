@@ -9,49 +9,13 @@
     <h1>{{ excursion.name }}</h1>
     <h3>Длительность: {{ excursion.interval }}</h3>
 
-    <!-- Карусель фотографий с навигационными кнопками -->
-    {% if photos.exists %}
-    <div class="excursion-photo-carousel">
-        <button class="carousel-btn prev-btn" onclick="prevPhoto()">&#10094;</button>
+    {% include 'tour/components/excursion_photo_carusel.html' %}
 
-        <div class="photo-wrapper">
-            {% for elem in photos %}
-            <img src="{{ elem.photo.url }}" alt="{{ excursion.name }}" class="excursion-photo"
-                onclick="openModal('{{ elem.photo.url }}')">
-            {% endfor %}
-        </div>
+    {% include 'tour/components/excursion_page_details.html' %}
 
-        <button class=" carousel-btn next-btn" onclick="nextPhoto()">&#10095;</button>
-    </div>
-    {% else %}
-    <p class="no-photos">Нет фотографий</p>
-    {% endif %}
-
-    <div class="excursion-details">
-        <h4>Описание:</h4>
-        <h4>{{ excursion.description|linebreaksbr }}</h4>
-
-        <h4>Маршрут:</h4>
-        <h4>{{ excursion.route|linebreaksbr }}</h4>
-
-        <h4>Входит в стоимость: </br>
-            {{ excursion.in_price|linebreaksbr }}</h4>
-        <h4>Не входит в стоимость: </br>
-            {{ excursion.out_price|linebreaksbr }}</h4>
-
-        <h4>Стоимость билета: </br>
-            {{ excursion.price|linebreaksbr }}</h4>
-    </div>
-    <button onclick="history.back()" class="back-button">Назад</button>
+    {% include 'tour/components/back_button.html' %}
 </div>
 
-
-
-<!-- Модальное окно -->
-<div id="photoModal" class="modal">
-    <span class="close-modal" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage">
-</div>
 
 <script src="{% static 'js/excursion_page.js' %}"></script>
 {% endblock content %}
