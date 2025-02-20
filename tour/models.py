@@ -25,6 +25,11 @@ class Tour(models.Model):
     photo = models.ImageField(verbose_name="Фото", default="default.JPG", upload_to="tour_photo")
     hotel_description = models.TextField(verbose_name="Описание отелей", default="Отель")
 
+    def get_presentation_upload_path(self, filename):
+        return os.path.join('tour_presentation', self.name, filename)
+    
+    presentation = models.FileField(verbose_name="Презентация", default="default.jpg", upload_to=get_presentation_upload_path)
+
     class Meta:
        verbose_name = "Тур"
        verbose_name_plural = "Туры"

@@ -43,6 +43,17 @@
         </ul>
     </div>
 
+
+    <div class="tour-presentation">
+        {% if tour.presentation.name != 'default.jpg' %}
+        <h2>Презентация</h2>
+        <h4>Вы можете ознакомиться с полной программой тура, скачав презентацию по ссылке ниже.</h4>
+        <a href="{{ tour.presentation.url }}" download class="download-link">
+            <img src="/static/icons/pptx-icon.png" alt="PPTX" class="icon"> Презентация тура 📥
+        </a>
+        {% endif %}
+    </div>
+
     {% include 'tour/components/tour_order_form.html' %}
 
     {% include 'tour/components/back_button.html' %}
