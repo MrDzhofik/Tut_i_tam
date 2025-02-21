@@ -27,9 +27,9 @@ SECRET_KEY = KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tutitamabh.ru','176.124.215.186', '127.0.0.1']
+ALLOWED_HOSTS = ['tutitamabh.ru','176.124.215.186', '127.0.0.1', 'localhost']
 
-CSRF_TRUSTED_ORIGINS = ['https://tutitamabh.ru']
+CSRF_TRUSTED_ORIGINS = ['https://tutitamabh.ru', 'http://127.0.0.1', 'http://localhost']
 
 # Email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

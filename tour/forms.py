@@ -20,7 +20,6 @@ class ContactForm(ModelForm):
                 "placeholder": "+7 (XXX) XXX-XX-XX"
             }),
             "date": DateInput(
-
                 format="%d.%m.%Y",
                 attrs={
                 "class": "form-control",
@@ -37,10 +36,11 @@ class ContactForm(ModelForm):
             
         }
 
-    def email(self):
+    def email(self, name):
         """Отправка данных на почту"""
         subject = "Новая заявка на тур"
         message = f"""
+Название экскурсии(тура): {name}
 Имя: {self.cleaned_data['first_name']}
 Email: {self.cleaned_data['email']}
 Телефон: {self.cleaned_data['phone']}
