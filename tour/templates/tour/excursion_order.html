@@ -4,115 +4,23 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/excursion_page.css' %}">
+<link rel="stylesheet" href="{% static 'css/price_table.css' %}">
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 
 <div class="excursion-card">
-    <h1>{{ excursion.name }}</h1>
+    <h1 id="name">{{ excursion.name }}</h1>
     <h3>Длительность: {{ excursion.interval }}</h3>
 
-    <!-- Карусель фотографий с навигационными кнопками -->
-    {% if photos.exists %}
-    <div class="excursion-photo-carousel">
-        <button class="carousel-btn prev-btn" onclick="prevPhoto()">&#10094;</button>
+    {% include 'tour/components/excursion_photo_carusel.html' %}
 
-        <div class="photo-wrapper">
-            {% for elem in photos %}
-            <img src="{{ elem.photo.url }}" alt="{{ excursion.name }}" class="excursion-photo"
-                onclick="openModal('{{ elem.photo.url }}')">
-            {% endfor %}
-        </div>
+    {% include 'tour/components/excursion_order_details.html' %}
 
-        <button class=" carousel-btn next-btn" onclick="nextPhoto()">&#10095;</button>
-    </div>
-    {% else %}
-    <p class="no-photos">Нет фотографий</p>
-    {% endif %}
+    {% include 'tour/components/excursion_order_form.html' %}
 
-    <div class="excursion-details">
-        <h4>Маршрут:</h4>
-        <h4>{{ excursion.description|linebreaksbr }}</h4>
-
-        <h4>Входит в стоимость: </br>
-            {{ excursion.in_price|linebreaksbr }}</h4>
-        <h4>Не входит в стоимость: </br>
-            {{ excursion.out_price|linebreaksbr }}</h4>
-
-        <h4>Стоимость билета: </br>
-            {{ excursion.price|linebreaksbr }}</h4>
-    </div>
-
-    <form id="ContactForm">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.first_name.label_tag }}
-            {{ form.first_name }}
-            <div class="error-message">{{ form.first_name.errors }}</div>
-        </div>
-
-        <div class="form-group">
-            {{ form.email.label_tag }}
-            {{ form.email }}
-            <div class="error-message">{{ form.email.errors }}</div>
-        </div>
-
-        <div class="form-group">
-            {{ form.phone.label_tag }}
-            {{ form.phone }}
-            <div class="error-message">{{ form.phone.errors }}</div>
-        </div>
-
-        <div class="form-group">
-            {{ form.place.label_tag }}
-            {{ form.place }}
-        </div>
-
-        <div class="form-group">
-            {{ form.date.label_tag }}
-            {{ form.date }}
-        </div>
-
-        <div class="form-group">
-            {{ form.message.label_tag }}
-            {{ form.message }}
-        </div>
-
-        <button type="submit">Отправить заявку</button>
-    </form>
-
-    <p id="responseMessage"></p>
-</div>
-
-
-
-<!-- Модальное окно -->
-<div id="photoModal" class="modal">
-    <span class="close-modal" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage">
+    {% include 'tour/components/back_button.html' %}
 </div>
 
 <script src="{% static 'js/excursion_page.js' %}"></script>
+<script src="{% static 'js/form.js' %}"></script>
 
-
-<script>
-    document.getElementById("ContactForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let formData = new FormData(this);
-
-        fetch("", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    document.getElementById("responseMessage").innerText = data.message;
-                    document.getElementById("ContactForm").reset();
-                } else {
-                    document.getElementById("responseMessage").innerText = "Ошибка: " + JSON.stringify(data.errors);
-                }
-            })
-            .catch(error => console.error("Ошибка:", error));
-    });
-</script>
 {% endblock content %}

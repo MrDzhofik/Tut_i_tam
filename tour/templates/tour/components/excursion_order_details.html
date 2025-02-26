@@ -1,0 +1,33 @@
+<div class="excursion-details">
+    <h3 class="section-title">Описание</h3>
+    <h4 class="section-content">{{ excursion.description|linebreaksbr }}</h4>
+
+    <h3 class="section-title">Маршрут</h3>
+    <h4 class="section-content">{{ excursion.route|linebreaksbr }}</h4>
+
+    <table>
+        <tr>
+            <th>Входит в стоимость</th>
+            <th>Не входит в стоимость</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    {% for item in excursion.in_price.splitlines %}
+                    {% if item.strip %}<li>{{ item }}</li>{% endif %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for item in excursion.out_price.splitlines %}
+                    {% if item.strip %}<li>{{ item }}</li>{% endif %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <h3 class="section-title">Стоимость билета</h3>
+    <h4 class="section-content">{{ excursion.price|linebreaksbr }}</h4>
+</div>
