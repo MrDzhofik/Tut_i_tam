@@ -25,6 +25,11 @@ class Tour(models.Model):
     photo = models.ImageField(verbose_name="Фото", default="default.JPG", upload_to="tour_photo")
     hotel_description = models.TextField(verbose_name="Описание отелей", default="Отель")
 
+    def get_presentation_upload_path(self, filename):
+        return os.path.join('tour_presentation', self.name, filename)
+    
+    presentation = models.FileField(verbose_name="Презентация", default="default.jpg", upload_to=get_presentation_upload_path)
+
     class Meta:
        verbose_name = "Тур"
        verbose_name_plural = "Туры"
@@ -69,6 +74,7 @@ class Excursion(models.Model):
     in_price = models.TextField(verbose_name="Входит в стоимость", default="Поездка")
     out_price = models.TextField(verbose_name="Не входит в стоимость", default="Личные расходы")
     price = models.TextField(verbose_name="Стоимость билета", default="Бесценно")
+    public = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Экскурсия"
