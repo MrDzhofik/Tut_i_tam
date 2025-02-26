@@ -19,7 +19,8 @@
     margin-top: 30px;
 }
 
-.tour-section h2 {
+.tour-section h2,
+.tour-presentation h2 {
     color: #FFA500;
     border-bottom: 2px solid #FFA500;
     padding-bottom: 5px;
@@ -50,4 +51,42 @@
 .hotel-link {
     color: gold;
     text-decoration: none;
+}
+
+.back-button {
+    background-color: #000;
+    color: #FFA500;
+    border: 2px solid #FFA500;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.back-button:hover {
+    background-color: #FFA500;
+    color: #000;
+    border-color: #000;
+}
+
+.download-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.download-link:hover {
+    color: #b71c1c;
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
 }
