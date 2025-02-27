@@ -65,10 +65,10 @@ def excursion_order_show(request, excursion_id):
     form = ContactForm()
     if request.method == "POST":
         form = ContactForm(request.POST)
-        print(form)
         if form.is_valid():
+            name = request.POST.get("name", "")
             form.save()
-            form.email()
+            form.email(name)
             return JsonResponse({"message": "Форма успешно отправлена!"})
         return JsonResponse({"errors": form.errors}, status=400)
     
